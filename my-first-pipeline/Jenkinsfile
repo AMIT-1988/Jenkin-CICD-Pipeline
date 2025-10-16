@@ -1,11 +1,50 @@
 pipeline {
     agent any
 
+    environment {
+        PROJECT_NAME = 'MyTestProject'
+    }
+
     stages {
-        stage('Test Pipeline') {
+        stage('Checkout') {
             steps {
-                echo 'Hello, Jenkins! The pipeline is working 🎉'
+                echo 'Checking out source code...'
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building ${env.PROJECT_NAME}..."
+                // Simulate a build step
+                sh 'echo "Build successful!"'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests for ${env.PROJECT_NAME}..."
+                // Simulate test step
+                sh 'echo "All tests passed!"'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying ${env.PROJECT_NAME}..."
+                // Simulate deploy step
+                sh 'echo "Deployed successfully!"'
             }
         }
     }
+
+    post {
+        success {
+            echo '✅ Pipeline completed successfully.'
+        }
+        failure {
+            echo '❌ Pipeline failed.'
+        }
+    }
 }
+
