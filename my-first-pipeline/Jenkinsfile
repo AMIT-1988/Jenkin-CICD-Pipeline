@@ -17,7 +17,8 @@ pipeline {
             steps {
                 echo "Building ${env.PROJECT_NAME}..."
                 // Simulate a build step
-                sh 'echo "Build successful!"'
+               sh 'Hello'
+
             }
         }
 
@@ -25,7 +26,7 @@ pipeline {
             steps {
                 echo "Running tests for ${env.PROJECT_NAME}..."
                 // Simulate test step
-                sh 'echo "All tests passed!"'
+                sh 'echo All tests passed!'
             }
         }
 
@@ -33,7 +34,7 @@ pipeline {
             steps {
                 echo "Deploying ${env.PROJECT_NAME}..."
                 // Simulate deploy step
-                sh 'echo "Deployed successfully!"'
+                sh 'Deployed successfully!'
             }
         }
     }
