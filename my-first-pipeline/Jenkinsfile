@@ -1,12 +1,55 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent any
+
+    environment {
+        // Add any global environment variables here
+        APP_NAME = 'my-app'
     }
-  }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Cloning repository..."
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building the application..."
+                // Example: for Java
+                sh './gradlew build'
+                // or for Node.js
+                // sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests..."
+                // Example: for Java
+                sh './gradlew test'
+                // or for Node.js
+                // sh 'npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
+                // Placeholder for your deployment logic
+                // Example: shell script, Docker push, SCP, etc.
+                sh './deploy.sh'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully ✅"
+        }
+        failure {
+            echo "Pipeline failed ❌"
+        }
+    }
 }
