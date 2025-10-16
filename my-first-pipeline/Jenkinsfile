@@ -1,55 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        // Add any global environment variables here
-        APP_NAME = 'my-app'
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Test Pipeline') {
             steps {
-                echo "Cloning repository..."
-                checkout scm
+                echo 'Hello, Jenkins! The pipeline is working 🎉'
             }
-        }
-
-        stage('Build') {
-            steps {
-                echo "Building the application..."
-                // Example: for Java
-                sh './gradlew build'
-                // or for Node.js
-                // sh 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Running tests..."
-                // Example: for Java
-                sh './gradlew test'
-                // or for Node.js
-                // sh 'npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Deploying application..."
-                // Placeholder for your deployment logic
-                // Example: shell script, Docker push, SCP, etc.
-                sh './deploy.sh'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo "Pipeline completed successfully ✅"
-        }
-        failure {
-            echo "Pipeline failed ❌"
         }
     }
 }
